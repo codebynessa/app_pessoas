@@ -95,13 +95,58 @@ class _HomeScreenState extends State<HomeScreen> {
           'Home',
           style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            tooltip: 'Sair',
-            onPressed: _sair,
-          ),
-        ],
+      ),
+      // ---------- MENU LATERAL (DRAWER) ----------
+      drawer: Drawer(
+        child: Column(
+          children: [
+            Container(
+              width: double.infinity,
+              color: azul,
+              padding: const EdgeInsets.fromLTRB(20, 60, 20, 24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const CircleAvatar(
+                    radius: 32,
+                    backgroundColor: Colors.white,
+                    child: Icon(Icons.person, size: 40, color: azul),
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    _nomeUsuario,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.home),
+              title: const Text('Início'),
+              onTap: () {
+                Navigator.pop(context); // só fecha o menu
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.person_add),
+              title: const Text('Nova pessoa'),
+              onTap: () {
+                Navigator.pop(context); // fecha o menu
+                _abrirFormulario(); // abre a tela de cadastro
+              },
+            ),
+            const Divider(),
+            ListTile(
+              leading: const Icon(Icons.logout),
+              title: const Text('Sair'),
+              onTap: _sair,
+            ),
+          ],
+        ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

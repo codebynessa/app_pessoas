@@ -1,18 +1,10 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'database/conexao.dart';
 import 'screens/login_screen.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  // No Windows/Linux/Mac o sqflite precisa desta inicialização.
-  // No Android e iOS este bloco é ignorado.
-  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
-    sqfliteFfiInit();
-    databaseFactory = databaseFactoryFfi;
-  }
-
+  await Conexao.iniciar();
   runApp(const MyApp());
 }
 
